@@ -1,0 +1,65 @@
+# Dependencies
+node_modules/
+npm-debug.*
+yarn-debug.*
+yarn-error.*
+.pnpm-debug.log*
+
+# Environment
+.env
+.env.local
+.env.*.local
+
+# Build
+dist/
+build/
+.expo/
+.expo-shared/
+web-build/
+expo-env.d.ts
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+*.sublime-*
+.DS_Store
+
+# Logs
+*.log
+logs/
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Expo
+*.jks
+*.p8
+*.p12
+*.key
+*.mobileprovision
+*.orig.*
+*.pem
+
+# Native
+.kotlin/
+
+# Metro
+.metro-health-check*
+
+# Testing
+coverage/
+.nyc_output/
+
+# Cache
+.eslintcache
+node_modules/.cache/
+
+# TypeScript
+*.tsbuildinfo
+
+# Generated native folders
+/ios
+/android
