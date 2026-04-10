@@ -5,47 +5,33 @@
     "version": "1.0.0",
     "orientation": "portrait",
     "icon": "./assets/icon.png",
+    "userInterfaceStyle": "automatic",
     "splash": {
       "image": "./assets/splash.png",
       "resizeMode": "contain",
       "backgroundColor": "#ffffff"
     },
-    "updates": {
-      "fallbackToCacheTimeout": 0
-    },
     "assetBundlePatterns": [
       "**/*"
     ],
     "ios": {
-      "supportsTabletMode": true,
+      "supportsTablet": true,
       "bundleIdentifier": "com.crimemystery.app"
     },
     "android": {
       "adaptiveIcon": {
         "foregroundImage": "./assets/adaptive-icon.png",
-        "backgroundColor": "#ffffff"
+        "backgroundColor": "#FFFFFF"
       },
       "package": "com.crimemystery.app",
-      "permissions": [
-        "android.permission.INTERNET",
-        "android.permission.ACCESS_NETWORK_STATE"
-      ],
       "versionCode": 1
     },
     "web": {
-      "favicon": "./assets/favicon.png"
+      "favicon": "./assets/favicon.png",
+      "bundler": "metro"
     },
     "plugins": [
-      [
-        "expo-font",
-        {
-          "fonts": [
-            "./assets/fonts/Roboto-Regular.ttf",
-            "./assets/fonts/Roboto-Bold.ttf",
-            "./assets/fonts/Roboto-Italic.ttf"
-          ]
-        }
-      ]
+      "expo-font"
     ],
     "extra": {
       "eas": {
