@@ -8,6 +8,7 @@ import { COLORS, TYPOGRAPHY } from '../config/colors';
 import HomeScreen from '../screens/home/HomeScreen';
 import ShopScreen from '../screens/shop/ShopScreen';
 import ProfileScreen from '../screens/profile/ProfileScreen';
+import LeaderboardScreen from '../screens/profile/LeaderboardScreen';
 
 const Stack = createNativeStackNavigator();
 const Tab = createBottomTabNavigator();
@@ -53,6 +54,10 @@ const ProfileStackNavigator: React.FC = () => {
       }}
     >
       <Stack.Screen name="ProfileMain" component={ProfileScreen} />
+      <Stack.Screen 
+        name="Leaderboard" 
+        component={LeaderboardScreen}
+      />
     </Stack.Navigator>
   );
 };

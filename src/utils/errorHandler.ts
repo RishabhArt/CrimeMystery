@@ -11,6 +11,13 @@ export enum ErrorSeverity {
   CRITICAL = 'critical',
 }
 
+export interface ErrorContext {
+  screen?: string;
+  action?: string;
+  userId?: string;
+  metadata?: Record<string, any>;
+}
+
 export interface AppErrorOptions {
   code?: string;
   severity?: ErrorSeverity;
