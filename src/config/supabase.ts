@@ -4,14 +4,10 @@ import AsyncStorage from '@react-native-async-storage/async-storage';
 
 // Environment variable types
 declare global {
-  namespace NodeJS {
-    interface ProcessEnv {
-      EXPO_PUBLIC_SUPABASE_URL: string;
-      EXPO_PUBLIC_SUPABASE_ANON_KEY: string;
-      EXPO_PUBLIC_API_TIMEOUT?: string;
-      EXPO_PUBLIC_APP_VERSION?: string;
-    }
-  }
+  var EXPO_PUBLIC_SUPABASE_URL: string;
+  var EXPO_PUBLIC_SUPABASE_ANON_KEY: string;
+  var EXPO_PUBLIC_API_TIMEOUT: string | undefined;
+  var EXPO_PUBLIC_APP_VERSION: string | undefined;
 }
 
 // Get environment variables

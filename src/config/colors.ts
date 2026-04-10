@@ -28,18 +28,24 @@ export const COLORS = {
   // Semantic Colors
   SUCCESS: '#27AE60',       // Green
   SUCCESS_LIGHT: '#DCFCE7', // Light Green
-  WARNING: '#E74C3C',       // Red/Warning
-  WARNING_LIGHT: '#FEE2E2', // Light Red
+  WARNING: '#F39C12',       // Orange
+  WARNING_LIGHT: '#FEF3C7', // Light Orange
   ERROR: '#C62828',         // Deep Red
   ERROR_LIGHT: '#FFEBEE',   // Light Red
   INFO: '#1976D2',          // Blue
   INFO_LIGHT: '#E3F2FD',    // Light Blue
+  DANGER: '#E74C3C',        // Red (alias for WARNING)
 
   // Utility Colors
   DISABLED: '#BDBDBD',      // Disabled
   DIVIDER: '#E0E0E0',       // Border
+  BORDER: '#E0E0E0',        // Border (alias)
   TRANSPARENT: 'transparent',
   OVERLAY: 'rgba(0, 0, 0, 0.5)',
+
+  // Background variations
+  BACKGROUND_LIGHT: '#FFFFFF', // White
+  BACKGROUND_DARK: '#1A1A1A', // Dark Gray
 
   // Gradient Colors (for future use)
   GRADIENT_START: '#2A3F8E',

@@ -5,6 +5,20 @@ import AsyncStorage from '@react-native-async-storage/async-storage';
 import { STORAGE_KEYS, ERROR_CODES } from '../../constants';
 import { validateEmail, validatePassword } from '../../utils/validators';
 
+/**
+ * Convert Supabase User to AuthUser
+ */
+const convertToAuthUser = (supabaseUser: any): AuthUser => {
+  return {
+    id: supabaseUser.id,
+    email: supabaseUser.email || '',
+    user_metadata: supabaseUser.user_metadata || {},
+    app_metadata: supabaseUser.app_metadata || {},
+    created_at: supabaseUser.created_at,
+    last_sign_in_at: supabaseUser.last_sign_in_at,
+  };
+};
+
 interface AuthState {
   user: AuthUser | null;
   userProfile: User | null;
@@ -81,7 +95,7 @@ export const signUpWithEmail = createAsyncThunk(
       await AsyncStorage.setItem(STORAGE_KEYS.AUTH_USER, JSON.stringify(authData.user));
 
       return {
-        user: authData.user,
+        user: convertToAuthUser(authData.user),
         profile: profileData,
       };
     } catch (error: any) {
@@ -128,7 +142,7 @@ export const signInWithEmail = createAsyncThunk(
       await AsyncStorage.setItem(STORAGE_KEYS.AUTH_USER, JSON.stringify(data.user));
 
       return {
-        user: data.user,
+        user: convertToAuthUser(data.user),
         profile: profileData,
       };
     } catch (error: any) {
@@ -158,7 +172,7 @@ export const restoreSession = createAsyncThunk(
         .single();
 
       return {
-        user: data.session.user,
+        user: convertToAuthUser(data.session.user),
         profile: profileData,
       };
     } catch (error: any) {

@@ -1,62 +1,44 @@
-import { NavigationContainer } from '@react-navigation/native';
-import { createNativeStackNavigator } from '@react-navigation/native-stack';
-import { View, Text } from 'react-native';
+import React, { useEffect, useState } from 'react';
+import { useAppDispatch, useAppSelector } from '../redux/hooks';
+import { restoreSession } from '../redux/slices/authSlice';
+import AuthNavigator from './AuthNavigator';
+import AppNavigator from './AppNavigator';
+import { ActivityIndicator, View } from 'react-native';
 import { COLORS } from '../config/colors';
 
-// Placeholder screens - we'll create these later
-const HomeScreen = () => (
-  <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center', backgroundColor: COLORS.BACKGROUND }}>
-    <Text style={{ fontSize: 18, color: COLORS.TEXT_PRIMARY }}>Home Screen</Text>
-  </View>
-);
+/**
+ * Root Navigator
+ * Handles routing based on authentication state
+ */
+const RootNavigator: React.FC = () => {
+  const dispatch = useAppDispatch();
+  const { isAuthenticated, isLoading } = useAppSelector((state) => state.auth);
+  const [bootstrapping, setBootstrapping] = useState(true);
 
-const AuthScreen = () => (
-  <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center', backgroundColor: COLORS.BACKGROUND }}>
-    <Text style={{ fontSize: 18, color: COLORS.TEXT_PRIMARY }}>Auth Screen</Text>
-  </View>
-);
+  useEffect(() => {
+    const bootstrap = async () => {
+      try {
+        // Try to restore session on app start
+        await dispatch(restoreSession()).unwrap();
+      } catch (error) {
+        console.log('[RootNavigator] No session to restore');
+      } finally {
+        setBootstrapping(false);
+      }
+    };
 
-const GameScreen = () => (
-  <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center', backgroundColor: COLORS.BACKGROUND }}>
-    <Text style={{ fontSize: 18, color: COLORS.TEXT_PRIMARY }}>Game Screen</Text>
-  </View>
-);
+    bootstrap();
+  }, [dispatch]);
 
-const Stack = createNativeStackNavigator();
+  if (bootstrapping || isLoading) {
+    return (
+      <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center', backgroundColor: COLORS.BACKGROUND }}>
+        <ActivityIndicator size="large" color={COLORS.PRIMARY} />
+      </View>
+    );
+  }
 
-const RootNavigator = () => {
-  return (
-    <NavigationContainer>
-      <Stack.Navigator
-        initialRouteName="Home"
-        screenOptions={{
-          headerStyle: {
-            backgroundColor: COLORS.PRIMARY,
-          },
-          headerTintColor: COLORS.BACKGROUND,
-          headerTitleStyle: {
-            fontWeight: 'bold',
-          },
-        }}
-      >
-        <Stack.Screen 
-          name="Home" 
-          component={HomeScreen}
-          options={{ title: 'Crime Mystery Detective' }}
-        />
-        <Stack.Screen 
-          name="Auth" 
-          component={AuthScreen}
-          options={{ title: 'Authentication' }}
-        />
-        <Stack.Screen 
-          name="Game" 
-          component={GameScreen}
-          options={{ title: 'Game' }}
-        />
-      </Stack.Navigator>
-    </NavigationContainer>
-  );
+  return isAuthenticated ? <AppNavigator /> : <AuthNavigator />;
 };
 
 export default RootNavigator;
